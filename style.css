@@ -1,12 +1,13 @@
 
 h1, h3 {
-	font-family: "Comic Sans MS";
 	text-align: center;
+	font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 
 h1 {
 	font-size: 4pc;
 	
+    
 }
 
 h3 {
