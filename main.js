@@ -78,7 +78,7 @@ function plotpie () {
             }], innerSize: '60%'
         }],
         caption: {
-            text: 'This chart represents the lack of diversity in faculty at universities. As you can see, a majority of the faculty identify as White. There is a visible lack of people of color teaching at universities'}
+            text: 'This chart represents the lack of diversity in faculty at universities. As you can see, a majority of the faculty identify as white. There is a visible lack of people of color teaching at universities.'}
 })};
 
 
@@ -245,95 +245,34 @@ anychart.onDocumentReady(function() {
     chart.draw();
   });
 
-var slideIndex = 0;
-
-
-function showSlides() {
+var slideIndex = 1;
+  
+  
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+  
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+  
+function showSlides(n) {
     var i;
     var slides = document.getElementsByClassName("mySlides");
     var dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {slideIndex = 1}    
+    if (n < 1) {slideIndex = slides.length}
     for (i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";  
     }
-    slideIndex++;
-    if (slideIndex > slides.length) {slideIndex = 1}    
     for (i = 0; i < dots.length; i++) {
         dots[i].className = dots[i].className.replace(" active", "");
     }
     slides[slideIndex-1].style.display = "block";  
     dots[slideIndex-1].className += " active";
-    setTimeout(showSlides, 3000); // Change image every 3 seconds
+    
 }
-
-
-var categories = ['White', 'Black', 'Hispanic', 'Asian/Pacific Islander'];
-
-function plotpyramid() {
-    $(document).ready(function () {
-        var chart = new Highcharts.Chart({
-            chart: {
-            renderTo: 'pyramidchart',
-                type: 'bar'
-            },
-            title: {
-                text: 'Bachelor Degrees vs Doctorate Degrees: Race Distribution, 2016'
-            },
-            subtitle: {
-                text: 'Source: ncses.ed.gov'
-            },
-            xAxis: [{
-                categories: categories,
-                reversed: false,
-                labels: {
-                    step: 1
-                }
-            }, { // mirror axis on right sidec
-                opposite: true,
-                reversed: false,
-                categories: categories,
-                linkedTo: 0,
-                labels: {
-                    step: 1
-                }
-            }],
-            
-
-            plotOptions: {
-            bar:{
-                borderWidth: 0,
-            },
-            series: {
-                pointPadding: 0,
-                groupPadding: 0,
-                borderWidth: 0,
-                shadow: false
-            }
-            },
-
-            tooltip: {
-                formatter: function () {
-                    return '<b>' + this.series.name + ':' + this.point.category + " "  + '</b><br/>' 
-                }
-            },
-            series: [{
-            
-                name: 'Bachelors Degree',
-                color:'#87AFC7',
-                data: [1145220, 185880, 245081, 137364]
-            }
-        , {
-                name: 'Doctorate Degree',
-            color:'#3090C7',
-            className:'offset',
-                data: [33202, 5265, 3891, 3813]
-            }],
-            caption: {
-                text: 'This graph compares the number of bachelor degrees and bachelor degrees awarded per race in 2016. There is another visible representation of the lack of diversity at universities'},
-        
-    });
-})};
-
-
+  
 function openCity(cityName) {
     var i;
     var x = document.getElementsByClassName("tabchange");
@@ -344,23 +283,146 @@ function openCity(cityName) {
   }
 
 
+function bachbar() {
+    Highcharts.chart('bachbar', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Bachelor Degrees: Race Distribution, 2016'
+        },
+        subtitle: {
+            text: 'Source: ncses.nsf.gov'
+        },
+        
+        xAxis: {
+            categories: ['White', 'Black', 'Hispanic', 'Asian/Pacific Islander'],
+            title: {
+                text: 'Race/Ethnicity'
+            }
+        },
+        yAxis: {
+            
+            min: 0,
+            title: {
+                text: 'Number of Degrees',
+                
+            }
+            
+        },
+        
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        
+        credits: {
+            enabled: false
+        },
+
+
+       
+        series: [{
+            name: "2016",
+            data: [1145220, 185880, 245081, 137364]
+        }]
+    });
+}
+
+function docbar() {
+    Highcharts.chart('docbar', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Doctorate Degrees: Race Distribution, 2016'
+        },
+        subtitle: {
+            text: 'Source: ncses.nsf.gov'
+        },
+
+        xAxis: {
+            categories: ['White', 'Black', 'Hispanic', 'Asian/Pacific Islander'],
+            title: {
+                text: 'Race/Ethnicity'
+            }
+        },
+        yAxis: {
+            
+            min: 0,
+            title: {
+                text: 'Number of Degrees',
+                
+            }
+            
+        },
+        
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: "2016",
+            data: [33202, 5265, 3891, 3813]
+        }]
+    });
+}
+
+
+function mentorappear() {
+    var checkBox = document.getElementById("C1");
+    var text = document.getElementById("text1");
+    if (checkBox.checked == true){
+      text.style.display = "block";
+    } else {
+       text.style.display = "none";
+    }
+}
+
+function scholarappear() {
+    var checkBox = document.getElementById("C2");
+    var text = document.getElementById("text2");
+    if (checkBox.checked == true){
+      text.style.display = "block";
+    } else {
+       text.style.display = "none";
+    }
+}
+function fellowappear() {
+    var checkBox = document.getElementById("C3");
+    var text = document.getElementById("text3");
+    if (checkBox.checked == true){
+      text.style.display = "block";
+    } else {
+       text.style.display = "none";
+    }
+}
+
+
+
 
 function init() { 
     plotpie();
     plotline();
     showSlides();
-    plotpyramid();
+    docbar();
+    bachbar();
+    mentorappear();
+    scholarappear();
+    fellowappear();
+    showSlides(slideIndex);
 
 }
+
+
 document.addEventListener('DOMContentLoaded', init, false);
-
-
-/* <div class="w3-content w3-display-container">
-<img class="mySlides" src="images/grad1.jpg">
-<img class="mySlides" src="images/grad2.jpg">
-<img class="mySlides" src="images/grad3.jpg">
-<button class="w3-button w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-<button class="w3-button w3-display-right" onclick="plusDivs(+1)">&#10095;</button>
-</div> */
-
-/* <div id = "wordcloud"> */
